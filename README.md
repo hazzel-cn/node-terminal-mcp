@@ -1,4 +1,7 @@
-# node-terminal-mcp
+# @hazzel-cn/node-terminal-mcp
+
+[![npm version](https://badge.fury.io/js/%40hazzel-cn%2Fnode-terminal-mcp.svg)](https://www.npmjs.com/package/@hazzel-cn/node-terminal-mcp)
+[![GitHub](https://img.shields.io/github/license/hazzel-cn/node-terminal-mcp)](https://github.com/hazzel-cn/node-terminal-mcp)
 
 MCP server for terminal/PTY sessions using node-pty and xterm headless, designed for AI agents to interact with terminal environments.
 
@@ -13,8 +16,19 @@ MCP server for terminal/PTY sessions using node-pty and xterm headless, designed
 
 ## Installation
 
+### From npm (recommended)
+
 ```bash
+npm install -g @hazzel-cn/node-terminal-mcp
+```
+
+### From source
+
+```bash
+git clone https://github.com/hazzel-cn/node-terminal-mcp.git
+cd node-terminal-mcp
 npm install
+npm run build
 ```
 
 ## Building
@@ -85,3 +99,13 @@ The server provides the following MCP tools:
 
 - Node.js 18+
 - Compatible with MCP (Model Context Protocol) clients
+
+## Links
+
+- **npm**: https://www.npmjs.com/package/@hazzel-cn/node-terminal-mcp
+- **GitHub**: https://github.com/hazzel-cn/node-terminal-mcp
+- **Issues**: https://github.com/hazzel-cn/node-terminal-mcp/issues
+
+## License
+
+MIT License - see [LICENSE](LICENSE) file for details.
