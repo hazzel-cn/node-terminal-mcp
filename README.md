@@ -54,7 +54,7 @@ Add this to your Gemini CLI configuration file (usually `~/.gemini/settings.json
   "mcpServers": {
     "node-terminal-mcp": {
       "command": "npx",
-      "args": ["@hazzel-cn/node-terminal-mcp"],
+      "args": ["-y", "@hazzel-cn/node-terminal-mcp"],
       "env": {}
     }
   }
@@ -69,7 +69,7 @@ Add this to your Gemini CLI configuration file (usually `~/.gemini/settings.json
   "mcpServers": {
     "node-terminal-mcp": {
       "command": "npx",
-      "args": ["@hazzel-cn/node-terminal-mcp"],
+      "args": ["-y", "@hazzel-cn/node-terminal-mcp"],
       "env": {}
     }
   }
