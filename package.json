@@ -1,6 +1,6 @@
 {
   "name": "@hazzel-cn/node-terminal-mcp",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "MCP server for terminal/PTY sessions using node-pty and xterm headless",
   "main": "dist/index.js",
   "bin": {
