@@ -17,7 +17,7 @@ class TerminalMCPServer {
     this.server = new Server(
       {
         name: 'node-terminal-mcp',
-        version: '1.0.0',
+        version: '1.0.1',
       },
       {
         capabilities: {
@@ -290,24 +290,51 @@ class TerminalMCPServer {
   }
 
   async start() {
-    const transport = new StdioServerTransport();
-    await this.server.connect(transport);
-    
-    // Handle process signals for graceful shutdown
-    process.on('SIGINT', async () => {
-      await this.terminalManager.closeAllSessions();
-      process.exit(0);
-    });
-    
-    process.on('SIGTERM', async () => {
-      await this.terminalManager.closeAllSessions();
-      process.exit(0);
-    });
+    try {
+      const transport = new StdioServerTransport();
+      
+      // Add error handling for transport
+      transport.onerror = (error) => {
+        process.stderr.write(`Transport error: ${error}\n`);
+      };
+      
+      transport.onclose = () => {
+        process.stderr.write(`Transport closed\n`);
+      };
+      
+      await this.server.connect(transport);
+      
+      // Handle process signals for graceful shutdown
+      process.on('SIGINT', async () => {
+        await this.terminalManager.closeAllSessions();
+        process.exit(0);
+      });
+      
+      process.on('SIGTERM', async () => {
+        await this.terminalManager.closeAllSessions();
+        process.exit(0);
+      });
+    } catch (error) {
+      process.stderr.write(`Failed to start MCP server: ${error}\n`);
+      process.exit(1);
+    }
   }
 }
 
 // Start the server
 const server = new TerminalMCPServer();
+
+// Add process error handling
+process.on('uncaughtException', (error) => {
+  process.stderr.write(`Uncaught exception: ${error}\n`);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  process.stderr.write(`Unhandled rejection: ${reason}\n`);
+  process.exit(1);
+});
+
 server.start().catch((error) => {
   // Use process.stderr.write for stdio compatibility
   process.stderr.write(`Failed to start server: ${error.message}\n`);

@@ -47,14 +47,40 @@ npm run dev
 
 ### Gemini CLI
 
-Add this to your Gemini CLI configuration file (usually `~/.gemini/settings.json`):
-
+**Option A: Using stdio transport (default)**
 ```json
 {
   "mcpServers": {
     "node-terminal-mcp": {
       "command": "npx",
       "args": ["-y", "@hazzel-cn/node-terminal-mcp"],
+      "env": {}
+    }
+  }
+}
+```
+
+**Option B: If you get "Connection closed" errors with ADK, try this:**
+```json
+{
+  "mcpServers": {
+    "node-terminal-mcp": {
+      "command": "npx",
+      "args": ["-y", "@hazzel-cn/node-terminal-mcp"],
+      "env": {},
+      "timeout": 30000
+    }
+  }
+}
+```
+
+**Option C: Alternative workaround for persistent connection issues:**
+```json
+{
+  "mcpServers": {
+    "node-terminal-mcp": {
+      "command": "bash",
+      "args": ["-c", "npx -y @hazzel-cn/node-terminal-mcp"],
       "env": {}
     }
   }
