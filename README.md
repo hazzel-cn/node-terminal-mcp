@@ -53,7 +53,7 @@ npm run dev
   "mcpServers": {
     "node-terminal-mcp": {
       "command": "npx",
-      "args": ["-y", "@hazzel-cn/node-terminal-mcp"],
+      "args": ["-y", "@hazzel-cn/node-terminal-mcp@latest"],
       "env": {}
     }
   }
@@ -66,7 +66,7 @@ npm run dev
   "mcpServers": {
     "node-terminal-mcp": {
       "command": "npx",
-      "args": ["-y", "@hazzel-cn/node-terminal-mcp"],
+      "args": ["-y", "@hazzel-cn/node-terminal-mcp@latest"],
       "env": {},
       "timeout": 30000
     }
@@ -95,7 +95,7 @@ npm run dev
   "mcpServers": {
     "node-terminal-mcp": {
       "command": "npx",
-      "args": ["-y", "@hazzel-cn/node-terminal-mcp"],
+      "args": ["-y", "@hazzel-cn/node-terminal-mcp@latest"],
       "env": {}
     }
   }
@@ -141,6 +141,55 @@ The server provides the following MCP tools:
 
 - Node.js 18+
 - Compatible with MCP (Model Context Protocol) clients
+
+## Troubleshooting
+
+### ADK "Connection Closed" Issue
+
+If you're experiencing "Connection closed" errors with Google ADK, this is a known issue with stdio transport. Try these solutions:
+
+1. **Use the latest version:**
+```json
+{
+  "mcpServers": {
+    "node-terminal-mcp": {
+      "command": "npx",
+      "args": ["-y", "@hazzel-cn/node-terminal-mcp@latest"],
+      "env": {},
+      "timeout": 30000
+    }
+  }
+}
+```
+
+2. **Install globally:**
+```bash
+npm install -g @hazzel-cn/node-terminal-mcp
+```
+```json
+{
+  "mcpServers": {
+    "node-terminal-mcp": {
+      "command": "node-terminal-mcp",
+      "args": [],
+      "env": {}
+    }
+  }
+}
+```
+
+3. **Use bash wrapper:**
+```json
+{
+  "mcpServers": {
+    "node-terminal-mcp": {
+      "command": "bash",
+      "args": ["-c", "npx -y @hazzel-cn/node-terminal-mcp@latest"],
+      "env": {}
+    }
+  }
+}
+```
 
 ## Links
 
