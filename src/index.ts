@@ -339,8 +339,19 @@ process.on('unhandledRejection', (reason, promise) => {
 (async () => {
   try {
     await server.start();
-    // Keep the process alive
+    // Keep the process alive - prevent it from exiting
     process.stdin.resume();
+    
+    // Keep the event loop alive
+    const keepAlive = setInterval(() => {
+      // This keeps the process alive
+    }, 1000);
+    
+    // Clean up on exit
+    process.on('exit', () => {
+      clearInterval(keepAlive);
+    });
+    
   } catch (error) {
     process.stderr.write(`Failed to start server: ${error instanceof Error ? error.message : String(error)}\n`);
     process.exit(1);
