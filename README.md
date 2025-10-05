@@ -54,7 +54,7 @@ Add this to your Gemini CLI configuration file (usually `~/.gemini/settings.json
   "mcpServers": {
     "node-terminal-mcp": {
       "command": "npx",
-      "args": ["--yes", "@hazzel-cn/node-terminal-mcp"],
+      "args": ["@hazzel-cn/node-terminal-mcp"],
       "env": {}
     }
   }
@@ -63,14 +63,30 @@ Add this to your Gemini CLI configuration file (usually `~/.gemini/settings.json
 
 ### Google ADK
 
-Add this to your Google ADK configuration file:
-
+**Option A: Using npx (recommended)**
 ```json
 {
   "mcpServers": {
     "node-terminal-mcp": {
       "command": "npx",
-      "args": ["--yes", "@hazzel-cn/node-terminal-mcp"],
+      "args": ["@hazzel-cn/node-terminal-mcp"],
+      "env": {}
+    }
+  }
+}
+```
+
+**Option B: Using global installation (recommended)**
+```bash
+npm install -g @hazzel-cn/node-terminal-mcp
+```
+
+```json
+{
+  "mcpServers": {
+    "node-terminal-mcp": {
+      "command": "node-terminal-mcp",
+      "args": [],
       "env": {}
     }
   }

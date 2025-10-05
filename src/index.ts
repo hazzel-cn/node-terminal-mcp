@@ -292,19 +292,16 @@ class TerminalMCPServer {
   async start() {
     const transport = new StdioServerTransport();
     await this.server.connect(transport);
-    // Note: Avoid console.error in stdio mode as it can interfere with MCP communication
     
     // Handle process signals for graceful shutdown
-    process.on('SIGINT', () => {
-      this.terminalManager.closeAllSessions().then(() => {
-        process.exit(0);
-      });
+    process.on('SIGINT', async () => {
+      await this.terminalManager.closeAllSessions();
+      process.exit(0);
     });
     
-    process.on('SIGTERM', () => {
-      this.terminalManager.closeAllSessions().then(() => {
-        process.exit(0);
-      });
+    process.on('SIGTERM', async () => {
+      await this.terminalManager.closeAllSessions();
+      process.exit(0);
     });
   }
 }
