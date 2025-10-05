@@ -300,9 +300,11 @@ class TerminalMCPServer {
       
       transport.onclose = () => {
         process.stderr.write(`Transport closed\n`);
+        process.exit(0);
       };
       
       await this.server.connect(transport);
+      process.stderr.write(`Server connected to transport\n`);
       
       // Handle process signals for graceful shutdown
       process.on('SIGINT', async () => {
@@ -314,6 +316,9 @@ class TerminalMCPServer {
         await this.terminalManager.closeAllSessions();
         process.exit(0);
       });
+      
+      // Keep the process alive indefinitely
+      await new Promise(() => {});
     } catch (error) {
       process.stderr.write(`Failed to start MCP server: ${error}\n`);
       process.exit(1);
@@ -338,20 +343,9 @@ process.on('unhandledRejection', (reason, promise) => {
 // Start the server and keep it running
 (async () => {
   try {
+    process.stderr.write('Starting MCP server...\n');
     await server.start();
-    // Keep the process alive - prevent it from exiting
-    process.stdin.resume();
-    
-    // Keep the event loop alive
-    const keepAlive = setInterval(() => {
-      // This keeps the process alive
-    }, 1000);
-    
-    // Clean up on exit
-    process.on('exit', () => {
-      clearInterval(keepAlive);
-    });
-    
+    process.stderr.write('MCP server started successfully\n');
   } catch (error) {
     process.stderr.write(`Failed to start server: ${error instanceof Error ? error.message : String(error)}\n`);
     process.exit(1);
