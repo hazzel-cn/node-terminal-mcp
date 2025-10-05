@@ -306,6 +306,9 @@ class TerminalMCPServer {
       await this.server.connect(transport);
       process.stderr.write(`Server connected to transport\n`);
       
+      // Ensure stdin is open to prevent process exit in npm sandbox
+      process.stdin.resume();
+      
       // Handle process signals for graceful shutdown
       process.on('SIGINT', async () => {
         await this.terminalManager.closeAllSessions();
