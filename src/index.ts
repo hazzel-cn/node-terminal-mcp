@@ -335,8 +335,14 @@ process.on('unhandledRejection', (reason, promise) => {
   process.exit(1);
 });
 
-server.start().catch((error) => {
-  // Use process.stderr.write for stdio compatibility
-  process.stderr.write(`Failed to start server: ${error.message}\n`);
-  process.exit(1);
-});
+// Start the server and keep it running
+(async () => {
+  try {
+    await server.start();
+    // Keep the process alive
+    process.stdin.resume();
+  } catch (error) {
+    process.stderr.write(`Failed to start server: ${error instanceof Error ? error.message : String(error)}\n`);
+    process.exit(1);
+  }
+})();
