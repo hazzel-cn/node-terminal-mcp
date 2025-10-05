@@ -1,0 +1,37 @@
+{
+  "name": "@hazzel-cn/node-terminal-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for terminal/PTY sessions using node-pty and xterm headless",
+  "main": "dist/index.js",
+  "bin": {
+    "node-terminal-mcp": "dist/index.js",
+    "@hazzel-cn/node-terminal-mcp": "dist/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "mcp",
+    "terminal",
+    "pty",
+    "xterm",
+    "ai-agent"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.19.1",
+    "node-pty": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

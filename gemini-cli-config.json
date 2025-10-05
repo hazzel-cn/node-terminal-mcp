@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "node-terminal-mcp": {
+      "command": "node",
+      "args": ["/Users/henry/Desktop/Projects/node-terminal-mcp/dist/index.js"],
+      "env": {}
+    }
+  }
+}
